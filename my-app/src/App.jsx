@@ -5,9 +5,6 @@ function App() {
   return (
     <>
       <MyComponent></MyComponent>
-      <div>
-        Hello World
-      </div>
     </>
   )
 }
