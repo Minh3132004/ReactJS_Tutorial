@@ -1,13 +1,8 @@
 import { useState } from "react";
 
-function UserInfo() {
-    const [state, setState] = useState({
-        name: 'Minh',
-        age: 22,
-        address: 'Hanoi'
-    });
-    const [nameTemp, setNameTemp] = useState(state.name);
-    const [ageTemp, setAgeTemp] = useState(state.age);
+function UserInfo(props) {
+    const [nameTemp, setNameTemp] = useState(props.state.name);
+    const [ageTemp, setAgeTemp] = useState(props.state.age);
 
 
     const handleChangeName = (event) => {
@@ -20,8 +15,8 @@ function UserInfo() {
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent the default form submission behavior
-        setState({
-            ...state,
+        props.setState({
+            ...props.state,
             name: nameTemp,
             age: ageTemp
         });
@@ -30,9 +25,6 @@ function UserInfo() {
     return (
         <>
             <div>
-                <h1>My name is {state.name}</h1>
-                <h2>I am {state.age} years old</h2>
-                <h3>I live in {state.address}</h3>
                 <form onSubmit={handleSubmit}>
                     <label htmlFor="name">Name:</label>
                     <input value={nameTemp} type="text" onChange={handleChangeName} />
