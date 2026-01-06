@@ -1,26 +1,36 @@
 import { useState } from "react";
 
 function MyComponent() {
+    const [ageTemp , setAgeTemp] = useState();
     const [state, setState] = useState({
         name: 'Minh',
         age: 22,
         address: 'Hanoi'
     });
 
-    const handleClick = (event) => {
-        console.log(event.target);
+    const handleChange = (event) => {
+        setAgeTemp(event.target.value);
+    }
+
+    const handleSubmit = (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
         setState({
-            ...state, // spread operator to keep other state properties (sẽ giữ lại các thuộc tính state khác : name, address) 
-            age: 30
+            ...state ,
+            age: ageTemp
         });
-        console.log("My name is " + state.name + ", I'm " + state.age + " years old." + " I live in " + state.address);
-    };
+    }
 
     return (
         <div>
-            {state.name}, {state.age}-
-            This is MyComponent
-            <button onClick={handleClick} >Click me</button>
+            <h1>My name is {state.name}</h1>
+            <h2>I am {state.age} years old</h2>
+            <h3>I live in {state.address}</h3>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="age">Age:</label>
+                <input type="text" onChange={handleChange}/>
+                <p>Your age is: {ageTemp}</p>
+                <button>Update Age</button>
+            </form>
         </div>
     );
 }
