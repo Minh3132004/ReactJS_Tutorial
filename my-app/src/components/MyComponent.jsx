@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DisplayInfo from "./DisplayInfo";
+import AddUserInfo from "./AddUserInfo";
 
 function MyComponent() {
 
@@ -9,8 +10,13 @@ function MyComponent() {
         { id: 3, name: "Charlie", age: 35, address: "789 Pine Rd" }
     ]);
 
+    const handleAddUser = (user) => {
+        setListUser([...listUser, user]);
+    }
+
     return (
         <div>
+            <AddUserInfo handleAddUser={handleAddUser} />
             <DisplayInfo listUser={listUser} />
         </div>
     );
