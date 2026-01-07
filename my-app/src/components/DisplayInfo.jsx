@@ -1,5 +1,6 @@
 import { useState } from "react";
-import './DisplayInfo.scss'
+import './DisplayInfo.scss';
+import logo from '../assets/react.svg';
 
 function DisplayInfo(props) {
     const [activeBtn, setActiveBtn] = useState(false);
@@ -11,6 +12,7 @@ function DisplayInfo(props) {
 
     return (
         <div className="display-info-container">
+            <img src={logo} alt="React Logo" />
             {!activeBtn && <button onClick={handleClickBtn}>Show Info</button>}
             {activeBtn && <button onClick={handleClickBtn}>Hide Info</button>}
 
