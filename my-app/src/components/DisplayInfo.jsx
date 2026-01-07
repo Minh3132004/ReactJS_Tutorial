@@ -9,6 +9,10 @@ function DisplayInfo(props) {
         setActiveBtn(!activeBtn);
     }
 
+    const handleDeleteUser = (userId) => {
+        props.handleDeleteUser(userId);
+    }
+
 
     return (
         <div className="display-info-container">
@@ -48,6 +52,7 @@ function DisplayInfo(props) {
                         <h3>Name: {user.name}</h3>
                         <p style={{ paddingTop : '50px', color: user.age > 25 ? 'red' : 'green' }}>Age: {user.age}</p>
                         <p>Address: {user.address}</p>
+                        <button onClick = {() => handleDeleteUser(user.id)}>X</button>
                         <hr />
                     </div>
                 );

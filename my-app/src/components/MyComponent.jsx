@@ -11,13 +11,18 @@ function MyComponent() {
     ]);
 
     const handleAddUser = (user) => {
-        setListUser([...listUser, user]);
+        setListUser([user ,...listUser]);
+    }
+
+    const handleDeleteUser = (userId) => {
+        const updatedListUser = listUser.filter((user) => {return user.id !== userId});
+        setListUser(updatedListUser);
     }
 
     return (
         <div>
             <AddUserInfo handleAddUser={handleAddUser} />
-            <DisplayInfo listUser={listUser} />
+            <DisplayInfo listUser={listUser} handleDeleteUser={handleDeleteUser} />
         </div>
     );
 }
