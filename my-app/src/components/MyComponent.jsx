@@ -1,19 +1,17 @@
 import { useState } from "react";
 import DisplayInfo from "./DisplayInfo";
-import UserInfo from "./UserInfo";
 
 function MyComponent() {
 
-    const [state, setState] = useState({
-        name: 'Minh',
-        age: 22,
-        address: 'Hanoi'
-    });
+    const [listUser , setListUser] = useState([
+        { id: 1 , name: "Alice", age: 30, address: "123 Main St" },
+        { id: 2, name: "Bob", age: 25, address: "456 Oak Ave" },
+        { id: 3, name: "Charlie", age: 35, address: "789 Pine Rd" }
+    ]);
 
     return (
         <div>
-            <UserInfo state={state} setState={setState} />
-            <DisplayInfo state={state} />
+            <DisplayInfo listUser={listUser} />
         </div>
     );
 }

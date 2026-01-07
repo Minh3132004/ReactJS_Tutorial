@@ -1,11 +1,17 @@
 function DisplayInfo(props) {
     return (
         <>
-            <div>
-                <h1>My name is {props.state.name}</h1>
-                <p>My age is {props.state.age}</p>
-                <p>I live in {props.state.address}</p>
-            </div> 
+            {props.listUser.map((user) => {
+                return (
+                <div key={user.id}>
+                    <h1>User Info</h1>
+                    <h3>Name: {user.name}</h3>
+                    <p>Age: {user.age}</p>
+                    <p>Address: {user.address}</p>
+                    <hr />
+                </div>
+                );
+            })}
         </>
     )
 }
