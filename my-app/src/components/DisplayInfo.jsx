@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './DisplayInfo.scss';
 import logo from '../assets/react.svg';
 
@@ -12,6 +12,16 @@ function DisplayInfo(props) {
     const handleDeleteUser = (userId) => {
         props.handleDeleteUser(userId);
     }
+
+    useEffect(() => {
+        setTimeout(() => {
+            console.log(">>> Hello from useEffect");
+        }, 3000);
+    },[]);
+
+    // Khi không có [] thì mỗi lần component re-render thì useEffect sẽ chạy lại
+    // Khi có [] thì chỉ chạy 1 lần khi component được gắn vào DOM
+    // Khi có [biến phụ thuộc] thì mỗi lần biến phụ thuộc thay đổi thì useEffect sẽ chạy lại
 
 
     return (
