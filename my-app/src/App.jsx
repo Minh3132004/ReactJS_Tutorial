@@ -1,11 +1,10 @@
-import MyComponent from './components/MyComponent.jsx'
 import './App.scss'
 
 function App() {
   return (
-    <>
-      <MyComponent></MyComponent>
-    </>
+    <div>
+      <h1>Hello, World!</h1>
+    </div>
   )
 }
 
