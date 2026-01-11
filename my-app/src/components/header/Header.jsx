@@ -8,7 +8,7 @@ function Header() {
     return (
         <Navbar expand="lg" className="bg-body-tertiary">
             <Container>
-                <Navbar.Brand href="#home">App</Navbar.Brand>
+                <Navbar.Brand href="/">App</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
@@ -18,11 +18,11 @@ function Header() {
                     </Nav>
                     <Nav>
                         <NavDropdown title="Settings" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="#action/3.1">Log in</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">
+                            <NavDropdown.Item>Log in</NavDropdown.Item>
+                            <NavDropdown.Item>
                                 Log out
                             </NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.3">Profile</NavDropdown.Item>
+                            <NavDropdown.Item>Profile</NavDropdown.Item>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
