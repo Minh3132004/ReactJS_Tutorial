@@ -1,6 +1,9 @@
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import { Link } from 'react-router-dom';
 import { FiPieChart, FiBarChart2, FiActivity, FiMap, FiSun, FiGrid, FiShoppingCart, FiCalendar, FiBook, FiLayers } from 'react-icons/fi';
+import { RiAdminFill } from "react-icons/ri";
+import { FaGem } from 'react-icons/fa';
+
 
 
 function SideBar(props) {
@@ -14,7 +17,7 @@ function SideBar(props) {
                 <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
                     {/* Logo & Dashboard */}
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', justifyContent: isCollapsed ? 'center' : 'flex-start' }}>
-                        <div style={{ width: 36, height: 36, borderRadius: 8, backgroundColor: '#2f9ae0', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 700 }}>P</div>
+                        <RiAdminFill />
                         {!isCollapsed && (
                             <div style={{ fontSize: 16, fontWeight: 700, color: '#2c3e50' }}>Dashboard</div>
                         )}
@@ -22,20 +25,11 @@ function SideBar(props) {
 
                     <Menu style={{ flex: 1, overflowY: 'auto' }}>
                         <div style={{ padding: isCollapsed ? '8px 8px' : '8px 20px', color: '#9aa4ae', fontSize: 12, textTransform: 'uppercase', textAlign: isCollapsed ? 'center' : 'left' }}>General</div>
-                        <SubMenu label={isCollapsed ? '' : 'Charts'} icon={<FiActivity />}>
-                            <MenuItem icon={<FiPieChart />}><Link to="/charts/pie">Pie charts</Link></MenuItem>
-                            <MenuItem icon={<FiActivity />}><Link to="/charts/line">Line charts</Link></MenuItem>
-                            <MenuItem icon={<FiBarChart2 />}><Link to="/charts/bar">Bar charts</Link></MenuItem>
+                        <SubMenu label={isCollapsed ? '' : 'Feature'} icon={<FaGem />}>
+                            <MenuItem icon={<FiPieChart />}><Link to="/charts/pie">Quản lý users</Link></MenuItem>
+                            <MenuItem icon={<FiActivity />}><Link to="/charts/line">Quản lý bài quiz</Link></MenuItem>
+                            <MenuItem icon={<FiBarChart2 />}><Link to="/charts/bar">Quản lý question</Link></MenuItem>
                         </SubMenu>
-                        <MenuItem icon={<FiMap />}><Link to="/maps">Maps</Link></MenuItem>
-                        <MenuItem icon={<FiSun />}><Link to="/theme">Theme</Link></MenuItem>
-                        <MenuItem icon={<FiGrid />}><Link to="/components">Components</Link></MenuItem>
-                        <MenuItem icon={<FiShoppingCart />}><Link to="/ecommerce">E-commerce</Link></MenuItem>
-
-                        <div style={{ padding: isCollapsed ? '8px 8px' : '8px 20px', marginTop: 12, color: '#9aa4ae', fontSize: 12, textTransform: 'uppercase', textAlign: isCollapsed ? 'center' : 'left' }}>Extra</div>
-                        <MenuItem icon={<FiCalendar />}><Link to="/calendar">Calendar <span style={{ marginLeft: 8, background: '#27ae60', color: '#fff', borderRadius: 8, padding: '2px 6px', fontSize: 11, display: isCollapsed ? 'none' : 'inline-block' }}>New</span></Link></MenuItem>
-                        <MenuItem icon={<FiBook />}><Link to="/documentation">Documentation</Link></MenuItem>
-                        <MenuItem icon={<FiLayers />}><Link to="/examples">Examples</Link></MenuItem>
                     </Menu>
 
                     {/* User Info */}
