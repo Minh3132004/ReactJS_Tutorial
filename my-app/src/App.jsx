@@ -1,16 +1,22 @@
-import Button from 'react-bootstrap/esm/Button'
 import './App.scss'
 import Header from './components/header/Header'
-import { Link } from 'react-router-dom'
+import { Outlet, Link } from 'react-router-dom'
 
 function App() {
   return (
-    <>
-      <Header />
+    <div className="app-container">
+      <div className="header-container">
+        <Header />
+      </div>
+      <div className="main-container">
+        <div className="sidenav-container">
 
-      <button><Link to="/users">Users</Link></button>
-      <button><Link to="/admin">Admin</Link></button>
-    </>
+        </div>
+        <div className="app-content">
+          <Outlet />
+        </div>
+      </div>
+    </div>
   )
 }
 
