@@ -19,16 +19,16 @@ function SideBar(props) {
                     <div style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 16px', justifyContent: isCollapsed ? 'center' : 'flex-start' }}>
                         <RiAdminFill />
                         {!isCollapsed && (
-                            <div style={{ fontSize: 16, fontWeight: 700, color: '#2c3e50' }}>Dashboard</div>
+                            <Link to="/admin" style={{ fontSize: 16, fontWeight: 700, color: '#2c3e50', textDecoration: 'none' }}>Dashboard</Link>
                         )}
                     </div>
 
                     <Menu style={{ flex: 1, overflowY: 'auto' }}>
                         <div style={{ padding: isCollapsed ? '8px 8px' : '8px 20px', color: '#9aa4ae', fontSize: 12, textTransform: 'uppercase', textAlign: isCollapsed ? 'center' : 'left' }}>General</div>
                         <SubMenu label={isCollapsed ? '' : 'Feature'} icon={<FaGem />}>
-                            <MenuItem icon={<FiPieChart />}><Link to="/charts/pie">Quản lý users</Link></MenuItem>
-                            <MenuItem icon={<FiActivity />}><Link to="/charts/line">Quản lý bài quiz</Link></MenuItem>
-                            <MenuItem icon={<FiBarChart2 />}><Link to="/charts/bar">Quản lý question</Link></MenuItem>
+                            <MenuItem icon={<FiPieChart />}><Link to="/admin/manage-users">Quản lý users</Link></MenuItem>
+                            <MenuItem icon={<FiActivity />}><Link to="/admin/manage-quiz">Quản lý bài quiz</Link></MenuItem>
+                            <MenuItem icon={<FiBarChart2 />}><Link to="/admin/manage-question">Quản lý question</Link></MenuItem>
                         </SubMenu>
                     </Menu>
 
