@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
 import ModalCreateUser from './ModalCreateUser';
 import { useState } from 'react';
+import TableUser from './TableUser';
 
 const ManageUser = (props) => {
     const [showModal , setShowModal] = useState(false);
@@ -19,7 +20,7 @@ const ManageUser = (props) => {
                     <Button onClick={handleClickAddNew}>Add User</Button>
                 </div>
                 <div>
-                    Table list users
+                    <TableUser/>
                 </div>
                 <ModalCreateUser show={showModal} onClose={() => setShowModal(false)} />
             </div>
