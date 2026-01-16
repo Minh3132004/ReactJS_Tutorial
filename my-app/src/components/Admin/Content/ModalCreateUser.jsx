@@ -3,6 +3,7 @@ import axios from "axios";
 import "./ModalCreateUser.scss";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { toast as toasify } from "react-toastify";
 
 function ModalCreateUser( { show, onClose } ) {
 
@@ -24,7 +25,36 @@ function ModalCreateUser( { show, onClose } ) {
         }
     }
 
-    const handleSaveUser = () => {
+    const handleEmailChange = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    }
+
+    const handleUsernameChange = (username) => {
+        return username.length >= 3;
+    }
+
+    const handlePasswordChange = (password) => {
+        return password.length >= 6;
+    }
+
+
+    const handleSaveUser = async () => {
+
+        if(!handleEmailChange(email) || !handleUsernameChange(username) || !handlePasswordChange(password)) {
+            if(!handleEmailChange(email)) {
+                toasify.error("Invalid email format!");
+            }
+            if(!handleUsernameChange(username)) {
+                toasify.error("Username must be at least 3 characters!");
+            }
+            if(!handlePasswordChange(password)) {
+                toasify.error("Password must be at least 6 characters!");
+            }
+            return;
+        }   
+
+        
         const formData = new FormData();
         formData.append("email", email);
         formData.append("username", username);
@@ -33,13 +63,13 @@ function ModalCreateUser( { show, onClose } ) {
         formData.append("userImage", avatar);
 
         //call api create user
-        axios.post("http://localhost:8081/api/v1/participant", formData).then((response) => {
-            console.log("Create user success:", response.data);
+        let res = await axios.post("http://localhost:8081/api/v1/participant", formData)
+        if(res && res.data.EC === 0) {
+            toasify.success("Create new user successfully!");
             handleClose();
-        }).catch((error) => {
-            console.error("There was an error creating the user!", error);
+        } else {
+            toasify.error("Create new user failed!");
         }
-        );
     }
 
     return (
