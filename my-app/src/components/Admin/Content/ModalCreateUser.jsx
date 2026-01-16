@@ -1,9 +1,9 @@
 import { useState } from "react";
-import axios from "axios";
 import "./ModalCreateUser.scss";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast as toasify } from "react-toastify";
+import { postCreateUser } from "../../../services/apiServices";
 
 function ModalCreateUser( { show, onClose } ) {
 
@@ -54,20 +54,14 @@ function ModalCreateUser( { show, onClose } ) {
             return;
         }   
 
-        
-        const formData = new FormData();
-        formData.append("email", email);
-        formData.append("username", username);
-        formData.append("password", password);
-        formData.append("role", role);
-        formData.append("userImage", avatar);
-
         //call api create user
-        let res = await axios.post("http://localhost:8081/api/v1/participant", formData)
-        if(res && res.data.EC === 0) {
+        let res = await postCreateUser(email, username, password, role, avatar);
+        console.log("res create user: ", res);
+        if(res) {
             toasify.success("Create new user successfully!");
             handleClose();
-        } else {
+        } 
+        if(res) {
             toasify.error("Create new user failed!");
         }
     }
