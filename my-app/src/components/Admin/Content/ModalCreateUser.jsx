@@ -1,13 +1,14 @@
 import { useState } from "react";
+import axios from "axios";
 import "./ModalCreateUser.scss";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function ModalCreateUser() {
-    const [show, setShow] = useState(false);
+function ModalCreateUser( { show, onClose } ) {
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const handleClose = () => {
+        onClose();
+    }
 
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -23,11 +24,29 @@ function ModalCreateUser() {
         }
     }
 
+    const handleSaveUser = () => {
+        const formData = new FormData();
+        formData.append("email", email);
+        formData.append("username", username);
+        formData.append("password", password);
+        formData.append("role", role);
+        formData.append("userImage", avatar);
+
+        //call api create user
+        axios.post("http://localhost:8081/api/v1/participant", formData).then((response) => {
+            console.log("Create user success:", response.data);
+            handleClose();
+        }).catch((error) => {
+            console.error("There was an error creating the user!", error);
+        }
+        );
+    }
+
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            {/* <Button variant="primary" onClick={handleShow}>
                 Add new user
-            </Button>
+            </Button> */}
 
             <Modal
                 show={show}
@@ -120,7 +139,7 @@ function ModalCreateUser() {
                     <Button variant="outline-secondary" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <Button variant="primary" onClick={handleClose}>
+                    <Button variant="primary" onClick={handleSaveUser}>
                         Save
                     </Button>
                 </Modal.Footer>
