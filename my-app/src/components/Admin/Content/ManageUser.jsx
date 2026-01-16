@@ -5,7 +5,7 @@ const ManageUser = (props) => {
     return (
         <div className="manage-user-container">
             <div className="title">
-
+                Manage Users
             </div>
             <div className="users-content">
                 <div>
@@ -13,8 +13,8 @@ const ManageUser = (props) => {
                 </div>
                 <div>
                     Table list users
-                    <ModalCreateUser />
                 </div>
+                <ModalCreateUser />
             </div>
         </div>
     );
