@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { toast as toasify } from "react-toastify";
 import { updateUser } from "../../../services/apiServices";
 
-function ModalUpdateUser({ showModalUpdate, onClose, dataUpdate , fetchUsers }) {
+function ModalUpdateUser({ showModalUpdate, onClose, dataUpdate  , fetchUsers }) {
 
     const handleClose = () => {
         onClose();

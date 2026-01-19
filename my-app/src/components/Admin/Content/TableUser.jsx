@@ -1,7 +1,7 @@
 // TableUser.jsx
 const TableUser = (props) => {
 
-    const { users , setDataUpdate, setShowModalUpdate } = props;
+    const { users , setDataUpdate, setShowModalUpdate , setShowModalDelete } = props;
 
     return (
         <div className="table-user-wrapper" style={{ maxWidth: 900, margin: '32px auto', background: '#fff', borderRadius: 16, boxShadow: '0 8px 32px rgba(0,0,0,0.10)', padding: 32 }}>
@@ -49,7 +49,10 @@ const TableUser = (props) => {
                                             setDataUpdate(user);
                                             setShowModalUpdate(true);
                                         }} style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#6366f1', color: '#fff', fontWeight: 600, cursor: 'pointer', transition: 'background 0.2s' }}>Sửa</button>
-                                        <button style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#ef4444', color: '#fff', fontWeight: 600, cursor: 'pointer', transition: 'background 0.2s' }}>Xoá</button>
+                                        <button onClick={() => {
+                                            setDataUpdate(user);
+                                            setShowModalDelete(true);
+                                        }} style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#ef4444', color: '#fff', fontWeight: 600, cursor: 'pointer', transition: 'background 0.2s' }}>Xoá</button>
                                     </td>
                                 </tr>
                             ))
