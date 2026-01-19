@@ -1,27 +1,7 @@
 // TableUser.jsx
-import { useEffect, useState } from "react";
-import { getAllUsers } from "../../../services/apiServices";
+const TableUser = (props) => {
 
-const TableUser = () => {
-    const [users, setUsers] = useState([]);
-
-
-    const fetchUsers = async () => {
-        try {
-            let res = await getAllUsers();
-            console.log("res get all users: ", res);
-            if(res && res.EC === 0) {
-                setUsers(res.DT);
-            }
-        }
-        catch (error) {
-            console.log("Error fetching users: ", error);
-        }
-    }
-
-    useEffect( () => {
-        fetchUsers();   
-    }, []);
+    const { users , setDataUpdate, setShowModalUpdate } = props;
 
     return (
         <div className="table-user-wrapper" style={{ maxWidth: 900, margin: '32px auto', background: '#fff', borderRadius: 16, boxShadow: '0 8px 32px rgba(0,0,0,0.10)', padding: 32 }}>
@@ -65,7 +45,10 @@ const TableUser = () => {
                                     </td>
                                     <td className="table-user-actions" style={{ padding: '10px 8px', display: 'flex', gap: 8 }}>
                                         <button style={{ padding: '6px 14px', borderRadius: 8, border: '1px solid #6366f1', background: '#fff', color: '#6366f1', fontWeight: 600, cursor: 'pointer', transition: 'background 0.2s' }}>Xem</button>
-                                        <button style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#6366f1', color: '#fff', fontWeight: 600, cursor: 'pointer', transition: 'background 0.2s' }}>Sửa</button>
+                                        <button onClick={() => {
+                                            setDataUpdate(user);
+                                            setShowModalUpdate(true);
+                                        }} style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#6366f1', color: '#fff', fontWeight: 600, cursor: 'pointer', transition: 'background 0.2s' }}>Sửa</button>
                                         <button style={{ padding: '6px 14px', borderRadius: 8, border: 'none', background: '#ef4444', color: '#fff', fontWeight: 600, cursor: 'pointer', transition: 'background 0.2s' }}>Xoá</button>
                                     </td>
                                 </tr>

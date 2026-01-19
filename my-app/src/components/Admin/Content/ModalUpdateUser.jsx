@@ -1,27 +1,30 @@
-import { useState } from "react";
-import "./ModalCreateUser.scss";
+import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast as toasify } from "react-toastify";
-import { postCreateUser } from "../../../services/apiServices";
+import { updateUser } from "../../../services/apiServices";
 
-function ModalCreateUser( { showModalCreate, onClose, fetchUsers } ) {
+function ModalUpdateUser({ showModalUpdate, onClose, dataUpdate , fetchUsers }) {
 
     const handleClose = () => {
         onClose();
     }
 
-    const [email, setEmail] = useState("");
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [role, setRole] = useState("user");
-    const [image, setImage] = useState("");
-    const [previewImage, setPreviewImage] = useState("");
+    const [email, setEmail] = useState(dataUpdate.email || "");
+    const [username, setUsername] = useState(dataUpdate.username || "");
+    const [role, setRole] = useState(dataUpdate.role || "user");
+    const [image, setImage] = useState(dataUpdate.image || "");
+
+    useEffect(() => {
+        setEmail(dataUpdate.email || "");
+        setUsername(dataUpdate.username || "");
+        setRole(dataUpdate.role || "user");
+        setImage(dataUpdate.image || "");
+    }, [dataUpdate]);
 
     const handleUploadImage = (event) => {
-        if(event.target.files && event.target.files.length > 0) {
-        setPreviewImage(URL.createObjectURL(event.target.files[0]));
-        setImage(event.target.files[0]);
+        if (event.target.files && event.target.files.length > 0) {
+            setImage(event.target.files[0]);
         }
     }
 
@@ -34,36 +37,29 @@ function ModalCreateUser( { showModalCreate, onClose, fetchUsers } ) {
         return username.length >= 3;
     }
 
-    const handlePasswordChange = (password) => {
-        return password.length >= 6;
-    }
-
 
     const handleSaveUser = async () => {
 
-        if(!handleEmailChange(email) || !handleUsernameChange(username) || !handlePasswordChange(password)) {
-            if(!handleEmailChange(email)) {
+        if (!handleEmailChange(email) || !handleUsernameChange(username)) {
+            if (!handleEmailChange(email)) {
                 toasify.error("Invalid email format!");
             }
-            if(!handleUsernameChange(username)) {
+            if (!handleUsernameChange(username)) {
                 toasify.error("Username must be at least 3 characters!");
             }
-            if(!handlePasswordChange(password)) {
-                toasify.error("Password must be at least 6 characters!");
-            }
             return;
-        }   
+        }
 
         //call api create user
-        let res = await postCreateUser(email, username, password, role, image);
+        let res = await updateUser(dataUpdate.id, email , username, dataUpdate.password, role, image);
         console.log("res create user: ", res);
-        if(res && res.EC === 0) {
-            toasify.success("Create new user successfully!");
+        if (res && res.EC === 0) {
+            toasify.success("Update user successfully!");
             handleClose();
             fetchUsers();
-        } 
-        if(res && res.EC !== 0) {
-            toasify.error("Create new user failed!");
+        }
+        if (res && res.EC !== 0) {
+            toasify.error("Update user failed!");
         }
     }
 
@@ -74,14 +70,14 @@ function ModalCreateUser( { showModalCreate, onClose, fetchUsers } ) {
             </Button> */}
 
             <Modal
-                show={showModalCreate}
+                show={showModalUpdate}
                 onHide={handleClose}
                 size="lg"
                 centered
                 dialogClassName="custom-modal-xl"
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Create new user</Modal.Title>
+                    <Modal.Title>Update user</Modal.Title>
                 </Modal.Header>
 
                 <Modal.Body>
@@ -115,20 +111,6 @@ function ModalCreateUser( { showModalCreate, onClose, fetchUsers } ) {
                         </div>
 
                         <div className="col-md-6">
-                            <label htmlFor="inputPassword4" className="form-label">
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                id="inputPassword4"
-                                placeholder="********"
-                                value={password}
-                                onChange={(event) => setPassword(event.target.value)}
-                            />
-                        </div>
-
-                        <div className="col-md-6">
                             <label htmlFor="inputImage" className="form-label">
                                 Avatar
                             </label>
@@ -139,9 +121,15 @@ function ModalCreateUser( { showModalCreate, onClose, fetchUsers } ) {
                             <div className="img-preview">
                                 <span className="img-preview__label">Preview image</span>
                                 <div className="img-preview__frame">
-                                    <img
-                                        src={previewImage}
-                                        alt="Image preview"
+                                    <img 
+                                        src={
+                                            image
+                                                ? typeof image === "string"
+                                                    ? `data:image/jpeg;base64,${image}`
+                                                    : URL.createObjectURL(image)
+                                                : ""
+                                        }
+                                        alt="Image preview" 
                                     />
                                 </div>
                             </div>
@@ -173,4 +161,4 @@ function ModalCreateUser( { showModalCreate, onClose, fetchUsers } ) {
     );
 }
 
-export default ModalCreateUser;
+export default ModalUpdateUser;

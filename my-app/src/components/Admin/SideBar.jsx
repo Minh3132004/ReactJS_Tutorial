@@ -26,9 +26,9 @@ function SideBar(props) {
                     <Menu style={{ flex: 1, overflowY: 'auto' }}>
                         <div style={{ padding: isCollapsed ? '8px 8px' : '8px 20px', color: '#9aa4ae', fontSize: 12, textTransform: 'uppercase', textAlign: isCollapsed ? 'center' : 'left' }}>General</div>
                         <SubMenu label={isCollapsed ? '' : 'Feature'} icon={<FaGem />}>
-                            <MenuItem icon={<FiPieChart />}><Link to="/admin/manage-users">Quản lý users</Link></MenuItem>
-                            <MenuItem icon={<FiActivity />}><Link to="/admin/manage-quiz">Quản lý bài quiz</Link></MenuItem>
-                            <MenuItem icon={<FiBarChart2 />}><Link to="/admin/manage-question">Quản lý question</Link></MenuItem>
+                            <MenuItem icon={<FiPieChart />} component={<Link to="/admin/manage-users" />}>Quản lý users</MenuItem>
+                            <MenuItem icon={<FiActivity />} component={<Link to="/admin/manage-quiz" />}>Quản lý bài quiz</MenuItem>
+                            <MenuItem icon={<FiBarChart2 />} component={<Link to="/admin/manage-question" />}>Quản lý question</MenuItem>
                         </SubMenu>
                     </Menu>
 
