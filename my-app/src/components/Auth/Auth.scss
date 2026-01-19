@@ -1,0 +1,125 @@
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #dbeafe 0%, #818cf8 100%);
+}
+
+.auth-form {
+  background: #fff;
+  padding: 32px 28px;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10);
+  min-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  position: relative;
+}
+
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  text-align: center;
+  color: #64748b;
+  font-size: 15px;
+  margin-bottom: 8px;
+  margin-top: -8px;
+}
+
+.auth-form h2 {
+  text-align: center;
+  color: #6366f1;
+  margin-bottom: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+
+.form-group label {
+  font-weight: 600;
+  color: #3730a3;
+  letter-spacing: 0.2px;
+}
+
+
+// Input with icon
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon-left {
+  position: absolute;
+  left: 12px;
+  color: #a5b4fc;
+  font-size: 18px;
+  pointer-events: none;
+}
+
+
+.input-wrapper input {
+  padding: 8px 12px 8px 38px;
+  border-radius: 6px;
+  border: 1.5px solid #c7d2fe;
+  font-size: 16px;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  background: #eef2ff;
+  color: #22223b;
+  box-shadow: 0 1px 4px #6366f111;
+}
+
+
+.input-wrapper input:focus {
+  border: 2px solid #6366f1;
+  box-shadow: 0 0 0 2px #6366f133;
+  background: #fff;
+}
+
+.btn {
+  padding: 10px 0;
+  border-radius: 8px;
+  border: none;
+  background: #6366f1;
+  color: #fff;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px #6366f122;
+}
+
+.btn:hover {
+  background: #4f46e5;
+}
+
+.auth-links {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.link {
+  color: #6366f1;
+  cursor: pointer;
+  font-size: 15px;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.link:hover {
+  color: #4f46e5;
+}

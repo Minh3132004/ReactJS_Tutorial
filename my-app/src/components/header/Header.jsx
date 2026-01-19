@@ -2,11 +2,13 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import { FaRocket } from 'react-icons/fa';
 
 function Header() {
+
+    const navigate = useNavigate();
     return (
         <Navbar expand="lg" className="custom-navbar">
             <Container fluid className="px-4">
@@ -25,7 +27,7 @@ function Header() {
                         </NavDropdown>
                     </Nav>
                     <Nav className="d-flex align-items-center gap-2">
-                        <Nav.Link href="#" className="login-link">Log in</Nav.Link>
+                        <Nav.Link onClick={() => navigate("/login")} className="login-link">Log in</Nav.Link>
                         <Button variant="dark" className="signup-btn">Sign up</Button>
                     </Nav>
                 </Navbar.Collapse>
