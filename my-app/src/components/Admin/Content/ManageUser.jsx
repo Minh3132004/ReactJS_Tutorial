@@ -1,17 +1,20 @@
 import Button from 'react-bootstrap/Button';
-import ModalCreateUser from './ModalCreateUser'; 
-import TableUser from './TableUser';
+import ModalCreateUser from './ModalCreateUser';
 import { useEffect, useState } from "react";
-import { getAllUsers } from '../../../services/apiServices';
+import { getAllUsers, getUsersWithPaginate } from '../../../services/apiServices';
 import ModalUpdateUser from './ModalUpdateUser';
 import ModalDeleteUser from './ModalDeleteUser';
+import TableUserPaginate from './TableUserPaginate';
 
 const ManageUser = (props) => {
     const [showModalCreate, setShowModalCreate] = useState(false);
     const [showModalUpdate, setShowModalUpdate] = useState(false);
-    const [showModalDelete , setShowModalDelete] = useState(false);
-    const [dataUpdate , setDataUpdate] = useState({});  
-    
+    const [showModalDelete, setShowModalDelete] = useState(false);
+    const [dataUpdate, setDataUpdate] = useState({});
+
+    const LIMIT_USER_PER_PAGE = 1;
+    const [pageCount, setPageCount] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
 
     const [users, setUsers] = useState([]);
 
@@ -28,8 +31,23 @@ const ManageUser = (props) => {
         }
     }
 
+    const fetchUsersWithPaginate = async (page) => {
+        try {
+            let res = await getUsersWithPaginate(page, LIMIT_USER_PER_PAGE);
+            if (res && res.EC === 0) {
+                console.log("Fetch users with paginate: ", res.DT.users);
+                setUsers(res.DT.users);
+                setPageCount(res.DT.totalPages);
+            }
+        }
+        catch (error) {
+            console.log("Error fetching users: ", error);
+        }
+    }
+
+
     useEffect(() => {
-        fetchUsers();
+         fetchUsersWithPaginate(1);
     }, []);
 
 
@@ -47,11 +65,11 @@ const ManageUser = (props) => {
                     <Button onClick={handleClickAddNew}>Add User</Button>
                 </div>
                 <div>
-                    <TableUser users={users} dataUpdate={dataUpdate} setDataUpdate={setDataUpdate} setShowModalUpdate={setShowModalUpdate} setShowModalDelete={setShowModalDelete} />
+                    <TableUserPaginate fetchUsersWithPaginate={fetchUsersWithPaginate} currentPage={currentPage} setCurrentPage={setCurrentPage} pageCount={pageCount} users={users} dataUpdate={dataUpdate} setDataUpdate={setDataUpdate} setShowModalUpdate={setShowModalUpdate} setShowModalDelete={setShowModalDelete} />
                 </div>
-                <ModalCreateUser fetchUsers={fetchUsers} showModalCreate={showModalCreate} onClose={() => setShowModalCreate(false)} />
-                <ModalUpdateUser  fetchUsers={fetchUsers} showModalUpdate={showModalUpdate} dataUpdate={dataUpdate} onClose={() => setShowModalUpdate(false)} />
-                <ModalDeleteUser fetchUsers={fetchUsers} showModalDelete={showModalDelete} dataUpdate={dataUpdate} onClose={() => setShowModalDelete(false)} />
+                <ModalCreateUser fetchUsersWithPaginate={fetchUsersWithPaginate} currentPage={currentPage} setCurrentPage={setCurrentPage} fetchUsers={fetchUsers} showModalCreate={showModalCreate} onClose={() => setShowModalCreate(false)} />
+                <ModalUpdateUser fetchUsersWithPaginate={fetchUsersWithPaginate} currentPage={currentPage} setCurrentPage={setCurrentPage} fetchUsers={fetchUsers} showModalUpdate={showModalUpdate} dataUpdate={dataUpdate} onClose={() => setShowModalUpdate(false)} />
+                <ModalDeleteUser fetchUsersWithPaginate={fetchUsersWithPaginate} currentPage={currentPage} setCurrentPage={setCurrentPage} fetchUsers={fetchUsers} showModalDelete={showModalDelete} dataUpdate={dataUpdate} onClose={() => setShowModalDelete(false)} />
             </div>
         </div>
     );

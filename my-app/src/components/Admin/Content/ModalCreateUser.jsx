@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { toast as toasify } from "react-toastify";
 import { postCreateUser } from "../../../services/apiServices";
 
-function ModalCreateUser( { showModalCreate, onClose, fetchUsers } ) {
+function ModalCreateUser( { fetchUsersWithPaginate, currentPage, setCurrentPage, showModalCreate, onClose, fetchUsers } ) {
 
     const handleClose = () => {
         onClose();
@@ -60,7 +60,8 @@ function ModalCreateUser( { showModalCreate, onClose, fetchUsers } ) {
         if(res && res.EC === 0) {
             toasify.success("Create new user successfully!");
             handleClose();
-            fetchUsers();
+            fetchUsersWithPaginate(1);
+            setCurrentPage(1);
         } 
         if(res && res.EC !== 0) {
             toasify.error("Create new user failed!");

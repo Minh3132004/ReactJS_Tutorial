@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast as toasify } from "react-toastify";
 
-function ModalDeleteUser({ showModalDelete, onClose, dataUpdate , fetchUsers }) {
+function ModalDeleteUser({fetchUsersWithPaginate, currentPage, setCurrentPage, showModalDelete, onClose, dataUpdate , fetchUsers }) {
 
     const handleClose = () => {
         onClose();
@@ -26,7 +26,8 @@ function ModalDeleteUser({ showModalDelete, onClose, dataUpdate , fetchUsers }) 
         if (res && res.EC === 0) {
             toasify.success("Delete successfully!");
             handleClose();
-            fetchUsers();
+            setCurrentPage(1);
+            await fetchUsersWithPaginate(1);
         }
         if (res && res.EC !== 0) {
             toasify.error("Delete user failed!");

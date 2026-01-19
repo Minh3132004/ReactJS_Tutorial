@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { toast as toasify } from "react-toastify";
 import { updateUser } from "../../../services/apiServices";
 
-function ModalUpdateUser({ showModalUpdate, onClose, dataUpdate  , fetchUsers }) {
+function ModalUpdateUser({ fetchUsersWithPaginate, currentPage, setCurrentPage, showModalUpdate, onClose, dataUpdate }) {
 
     const handleClose = () => {
         onClose();
@@ -56,7 +56,7 @@ function ModalUpdateUser({ showModalUpdate, onClose, dataUpdate  , fetchUsers })
         if (res && res.EC === 0) {
             toasify.success("Update user successfully!");
             handleClose();
-            fetchUsers();
+            fetchUsersWithPaginate(currentPage);
         }
         if (res && res.EC !== 0) {
             toasify.error("Update user failed!");
