@@ -12,7 +12,7 @@ const ManageUser = (props) => {
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [dataUpdate, setDataUpdate] = useState({});
 
-    const LIMIT_USER_PER_PAGE = 1;
+    const LIMIT_USER_PER_PAGE = 4;
     const [pageCount, setPageCount] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -47,7 +47,7 @@ const ManageUser = (props) => {
 
 
     useEffect(() => {
-         fetchUsersWithPaginate(1);
+        fetchUsersWithPaginate(1);
     }, []);
 
 

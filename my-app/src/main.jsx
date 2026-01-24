@@ -1,28 +1,12 @@
 import { createRoot } from 'react-dom/client'
 import './index.css'
-import App from './App.jsx'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './components/HomePage/HomePage.jsx';
-import User from './components/User/User.jsx';
-import Admin from './components/Admin/Admin.jsx';
-import Dashboard from './components/Admin/Content/Dashboard.jsx';
-import ManageUser from './components/Admin/Content/ManageUser.jsx';
-import Login from './components/Auth/Login.jsx';
+import 'react-toastify/dist/ReactToastify.css';
+import Layout from './Layout.jsx';
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} >
-        <Route index element={<HomePage />} />
-        <Route path="/users" element={<User />} />
-      </Route>
-      <Route path="/admin" element={<Admin />} >
-          <Route index element={<Dashboard />} />
-          <Route path="manage-users" element={<ManageUser />} />
-      </Route>
-      <Route path="/login" element={<Login />} />
-
-    </Routes>
-  </BrowserRouter >
+    <Layout />
+  </BrowserRouter>
 )

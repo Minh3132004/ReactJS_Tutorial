@@ -1,0 +1,43 @@
+import { Routes, Route } from "react-router-dom";
+import App from "./App";
+import HomePage from "./components/HomePage/HomePage";
+import User from "./components/User/User";
+import Dashboard from "./components/Admin/Content/Dashboard";
+import ManageUser from "./components/Admin/Content/ManageUser";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
+import { ToastContainer } from "react-toastify";
+import Admin from "./components/Admin/Admin";
+
+function Layout() {
+    return (
+        <>
+            <Routes>
+                <Route path="/" element={<App />} >
+                    <Route index element={<HomePage />} />
+                    <Route path="/users" element={<User />} />
+                </Route>
+                <Route path="/admin" element={<Admin />} >
+                    <Route index element={<Dashboard />} />
+                    <Route path="manage-users" element={<ManageUser />} />
+                </Route>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+            </Routes>
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
+        </>
+    )
+}
+
+export default Layout;
